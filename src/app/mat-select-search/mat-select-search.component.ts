@@ -197,6 +197,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
   /** Output emitter to send to parent component with the toggle all boolean */
   @Output() toggleAll = new EventEmitter<boolean>();
 
+  /** Output emitter to send to parent component with the clear boolean */
+  @Output() onClear = new EventEmitter<any>();
+
   /** Reference to the search input field */
   @ViewChild('searchSelectInput', { read: ElementRef, static: true }) searchSelectInput: ElementRef;
 
@@ -515,6 +518,9 @@ export class MatSelectSearchComponent implements OnInit, OnDestroy, ControlValue
     this._formControl.setValue('');
     if (focus) {
       this._focus();
+    }
+    if (this.onClear) {
+      this.onClear.emit();
     }
   }
 
